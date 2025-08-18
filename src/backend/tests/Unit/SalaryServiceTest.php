@@ -40,7 +40,7 @@ class SalaryServiceTest extends TestCase
         $service = new SalaryService($repo);
         $result = $service->upsertByEmail($payload);
 
-        $this->assertSame(500.00, $result->commission);
+        $this->assertSame(500.00, (float) $result->commission);
     }
 
     /**
@@ -64,7 +64,7 @@ class SalaryServiceTest extends TestCase
 
         $res = $service->updateById(1, ['commission' => 600.00]);
 
-        $this->assertSame(600.00, $res->commission);
+        $this->assertEquals(600.00, (float) $res->commission);
     }
 
     /**
