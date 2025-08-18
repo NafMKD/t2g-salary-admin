@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Models\Salary;
 use App\Repositories\Contracts\SalaryRepositoryInterface;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
 class SalaryService
 {
@@ -23,6 +24,17 @@ class SalaryService
         $payload['commission'] ??= 500.00;
 
         return $this->salaries->upsertByEmail($payload);
+    }
+
+    /**
+     * Paginate salaries.
+     *
+     * @param int $perPage
+     * @return LengthAwarePaginator
+     */
+    public function paginate(int $perPage = 15): LengthAwarePaginator
+    {
+        return $this->salaries->paginate($perPage);
     }
 
     /**
