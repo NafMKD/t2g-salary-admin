@@ -1,0 +1,6 @@
+@import "tailwindcss";
+
+/* Optional theme overrides */
+@theme {
+  /* --color-brand: #1a202c; */
+}
