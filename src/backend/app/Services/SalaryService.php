@@ -48,4 +48,15 @@ class SalaryService
     {
         return $this->salaries->updateById($id, $data);
     }
+
+    /**
+     * Delete salary by id (admin).
+     *
+     * @param int $id
+     * @return bool
+     */
+    public function deleteById(int $id): bool
+    {
+        return $this->salaries->deleteById($id);
+    }
 }

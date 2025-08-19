@@ -74,4 +74,16 @@ class SalaryRepository implements SalaryRepositoryInterface
 
         return $salary->refresh();
     }
+
+    /**
+     * Delete a salary by id.
+     *
+     * @param int $id
+     * @return bool
+     */
+    public function deleteById(int $id): bool
+    {
+        $salary = Salary::query()->findOrFail($id);
+        return $salary->delete();
+    }
 }

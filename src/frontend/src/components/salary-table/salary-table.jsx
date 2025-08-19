@@ -19,6 +19,7 @@ export default function SalaryTable() {
   const [editValues, setEditValues] = useState({});
   const [search, setSearch] = useState("");
   const [showDelete, setShowDelete] = useState(null);
+  const [alert, setAlert] = useState(null);
 
   async function load(page = 1, perPage = 10) {
     if (!token) return;
@@ -73,6 +74,18 @@ export default function SalaryTable() {
 
   return (
     <div className="rounded-xl bg-white p-6 shadow border border-gray-200">
+      {alert && (
+        <div
+          className={`mb-4 rounded-lg px-4 py-2 text-sm ${
+            alert.type === "success"
+              ? "bg-green-50 text-green-700 border border-green-200"
+              : "bg-red-50 text-red-700 border border-red-200"
+          }`}
+        >
+          {alert.message}
+        </div>
+      )}
+
       <SalaryTableHeader
         meta={meta}
         load={load}
@@ -96,10 +109,19 @@ export default function SalaryTable() {
 
       {showDelete && (
         <DeleteModal
+          id={showDelete}
           onCancel={() => setShowDelete(null)}
-          onConfirm={() => {
-            setRows((prev) => prev.filter((r) => r.id !== showDelete));
+          onSuccess={(deletedId) => {
+            setRows((prev) => prev.filter((r) => r.id !== deletedId));
             setShowDelete(null);
+            setAlert({
+              type: "success",
+              message: "Salary record deleted successfully.",
+            });
+          }}
+          onError={(msg) => {
+            setShowDelete(null);
+            setAlert({ type: "error", message: msg });
           }}
         />
       )}

@@ -39,4 +39,12 @@ interface SalaryRepositoryInterface
      * @return Salary
      */
     public function updateById(int $id, array $data): Salary;
+
+    /**
+     * Delete a salary by id.
+     *
+     * @param int $id
+     * @return bool
+     */
+    public function deleteById(int $id): bool;
 }

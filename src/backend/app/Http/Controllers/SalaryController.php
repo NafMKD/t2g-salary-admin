@@ -70,4 +70,20 @@ class SalaryController extends Controller
 
         return response()->json(new SalaryResource($updated));
     }
+
+    /**
+     * Admin: delete salary by id.
+     *
+     * @param int $id
+     * @return JsonResponse
+     */
+    public function destroy(int $id): JsonResponse
+    {
+        $salary = Salary::query()->findOrFail($id);
+        $this->authorize('delete', $salary);
+
+        $this->service->deleteById($id);
+
+        return response()->json(null, 204);
+    }
 }

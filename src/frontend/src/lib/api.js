@@ -38,3 +38,29 @@ export async function apiPut(path, body, token) {
   if (!res.ok) throw new Error(`Error ${res.status}: ${res.statusText}`);
   return res.json();
 }
+
+export async function apiDelete(path, token) {
+  const res = await fetch(`${API_BASE_URL}${path}`, {
+    method: "DELETE",
+    headers: {
+      Authorization: `Bearer ${token}`,
+      Accept: "application/json",
+    },
+  });
+
+  if (!res.ok) {
+    let message = "Request failed";
+    try {
+      const data = await res.json();
+      message = data.message || message;
+    } catch (_) {
+    }
+    throw new Error(message);
+  }
+
+  if (res.status === 204) {
+    return null;
+  }
+
+  return await res.json();
+}

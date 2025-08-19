@@ -6,10 +6,12 @@ const AuthContext = createContext();
 
 export function AuthProvider({ children }) {
   const [token, setToken] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const t = window.localStorage.getItem("ADMIN_TOKEN");
     if (t) setToken(t);
+    setLoading(false);
   }, []);
 
   function handleSetToken(t) {
@@ -22,6 +24,7 @@ export function AuthProvider({ children }) {
     token,
     setToken: handleSetToken,
     isAuthenticated: Boolean(token),
+    loading,
   };
 
   return <AuthContext.Provider value={ctx}>{children}</AuthContext.Provider>;

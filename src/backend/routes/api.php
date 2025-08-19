@@ -13,4 +13,5 @@ Route::post('/salaries', [SalaryController::class, 'store']);
 Route::middleware('auth:sanctum')->group(function (): void {
     Route::get('/salaries', [SalaryController::class, 'index']);
     Route::put('/salaries/{id}', [SalaryController::class, 'update']);
+    Route::delete('/salaries/{id}', [SalaryController::class, 'destroy']);
 });

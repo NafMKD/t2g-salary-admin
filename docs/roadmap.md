@@ -113,6 +113,7 @@
 
 ## Error handling
 
+* 204: Resource deleted
 * 401: unauthenticated.
 * 403: not admin (policy denies).
 * 404: missing resource.

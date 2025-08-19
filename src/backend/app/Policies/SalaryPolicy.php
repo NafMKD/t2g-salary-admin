@@ -27,4 +27,15 @@ class SalaryPolicy
     {
         return $user->is_admin === true;
     }
+
+    /**
+     * Determine if user can delete a salary.
+     *
+     * @param User $user
+     * @return bool
+     */
+    public function delete(User $user): bool
+    {
+        return $user->is_admin === true;
+    }
 }
